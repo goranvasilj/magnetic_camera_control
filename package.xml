@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package>
+  <name>magnetic_camera_control</name>
+  <version>0.0.0</version>
+  <description>
+    The my_package package provides a ROS node that subscribes to two topics and publishes to two topics.
+  </description>
+  <maintainer email="goran.vasiljevic@fer.hr">Goran Vasiljevic</maintainer>
+  <license>MIT</license>
+ <build_depend>message_generation</build_depend>
+  <run_depend>message_runtime</run_depend>  
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>std_msgs</run_depend>
+</package>
