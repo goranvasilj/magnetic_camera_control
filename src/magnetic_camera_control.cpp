@@ -60,7 +60,7 @@ int main(int argc, char **argv) {
 	ros::Publisher pub_yaw = nh.advertise < std_msgs::Float32 > (cmd_yaw, 10);
 	ros::Publisher pub_pitch = nh.advertise < std_msgs::Float32 > (cmd_pitch, 10);
 
-	ros::Rate loop_rate(1); // 10 Hz
+	ros::Rate loop_rate(2); // 10 Hz
 
 	while (ros::ok()) {
 		// Prepare and publish messages
@@ -72,15 +72,18 @@ int main(int argc, char **argv) {
 		get_powerline_pose(x, y, z, yaw);
 		double yaw_command = -yaw;
 		double pitch_command = atan(z / sqrt(x * x + y * y));
-		std::cout<<"yaw pitch "<<yaw_command<<" "<<pitch_command<<std::endl;
+		std::cout<<"yaw pitch "<<-yaw_command/3.14159*180+180<<" "<<pitch_command/3.14159*180<<std::endl;
 
 		std_msgs::Float32 yaw_message;
 		std_msgs::Float32 pitch_message;
-		yaw_message.data=yaw_command;
-		pitch_message.data=pitch_command;
+		yaw_message.data=-yaw_command/3.14159*180+180;
+		pitch_message.data=-pitch_command/3.14159*180;
 
 		pub_yaw.publish(yaw_message);
-		pub_pitch.publish(pitch_message);
+		ros::spinOnce();
+		loop_rate.sleep();
+
+		//pub_pitch.publish(pitch_message);
 
 		ros::spinOnce();
 		loop_rate.sleep();
